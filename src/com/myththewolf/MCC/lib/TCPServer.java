@@ -11,7 +11,7 @@ public class TCPServer {
   private String clientSentence;
   private ServerSocket welcomeSocket;
   private Socket connectionSocket;
-  private static HashMap<String, MessageChannelListener> events = new HashMap<>();
+  private  HashMap<String, MessageChannelListener> events = new HashMap<>();
   private JSONObject parse = null;
 
   public void startServer() throws Exception {
@@ -68,7 +68,7 @@ public class TCPServer {
     }
   }
 
-  public static void registerEventListener(String scope, MessageChannelListener list) {
+  public void registerEventListener(String scope, MessageChannelListener list) {
     events.put(scope, list);
   }
 
