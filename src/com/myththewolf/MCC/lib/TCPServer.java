@@ -48,7 +48,7 @@ public class TCPServer {
 
         if (parse == null || parse.isNull("packetType")) {
 
-          throw new JSONException("ERR");
+          throw new JSONException("packetType is missing!");
         }
       } catch (JSONException e) {
         System.out.println("Recevied bad packet: " + clientSentence);
@@ -57,20 +57,18 @@ public class TCPServer {
       }
 
       String type = parse.getString("packetType");
-
-
+      JSONObject rep = new JSONObject();
+      rep.put("status", "OK");
 
       events.forEach((key, val) -> {
-
-
-
         if (key.equals(type)) {
           parse.remove("packetType");
           val.onEvent(parse.toString(), this);
         }
       });
-
+      writeToClient(rep.toString());
     }
+
     try {
       welcomeSocket.close();
     } catch (IOException e) {
