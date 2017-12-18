@@ -11,27 +11,36 @@ public class TCPServer {
   private String clientSentence;
   private ServerSocket welcomeSocket;
   private Socket connectionSocket;
-  private  HashMap<String, MessageChannelListener> events = new HashMap<>();
+  private HashMap<String, MessageChannelListener> events = new HashMap<>();
   private JSONObject parse = null;
 
   public void startServer() throws Exception {
     run = true;
     run();
   }
-  
-  private void run() throws IOException {
+
+  private void run() {
 
 
-    welcomeSocket = new ServerSocket(6789);
+    try {
+      welcomeSocket = new ServerSocket(6789);
+    } catch (IOException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
     System.out.println("[MCC] Socket server running on /" + welcomeSocket.getLocalPort());
     while (run) {
-      connectionSocket = welcomeSocket.accept();
-      BufferedReader inFromClient =
-          new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+      try {
+        connectionSocket = welcomeSocket.accept();
+        BufferedReader inFromClient =
+            new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 
 
-      clientSentence = inFromClient.readLine();
-
+        clientSentence = inFromClient.readLine();
+      } catch (Exception e) {
+        e.printStackTrace();
+        continue;
+      }
 
       try {
         parse = new JSONObject(clientSentence);
@@ -41,12 +50,19 @@ public class TCPServer {
           throw new JSONException("ERR");
         }
       } catch (JSONException e) {
+        System.out.println("Recevied bad packet: " + clientSentence);
         sayError(e.getMessage());
-        return;
+        continue;
       }
-      
+
       String type = parse.getString("packetType");
+
+
+
       events.forEach((key, val) -> {
+
+
+
         if (key.equals(type)) {
           parse.remove("packetType");
           val.onEvent(parse.toString(), this);
@@ -54,7 +70,12 @@ public class TCPServer {
       });
 
     }
-    welcomeSocket.close();
+    try {
+      welcomeSocket.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     System.out.println("Closing server");
   }
 

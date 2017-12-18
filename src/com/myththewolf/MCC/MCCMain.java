@@ -7,6 +7,7 @@ import com.myththewolf.MCC.lib.messageListeners.ServerOnlineMessageListener;
 
 public class MCCMain implements PluginAdapter {
   public static BotPlugin plugin;
+  private TCPServer srv;
 
   @Override
   public void onDisable() {
@@ -17,17 +18,17 @@ public class MCCMain implements PluginAdapter {
   @Override
   public void onEnable(BotPlugin arg0) {
     plugin = arg0;
+    srv = new TCPServer();
     Thread T = new Thread(() -> {
-      TCPServer srv = new TCPServer();
       try {
         srv.startServer();
-        srv.registerEventListener("user-join", new ServerOnlineMessageListener());
       } catch (Exception e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
     });
     T.start();
+    srv.registerEventListener("user-join", new ServerOnlineMessageListener());
   }
 
 }
