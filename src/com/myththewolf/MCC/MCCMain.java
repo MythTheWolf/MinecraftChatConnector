@@ -35,10 +35,9 @@ public class MCCMain implements PluginAdapter {
     try {
       arg0.registerCommand("/setinfochan", new setInfoChannel());
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
-   
+
   }
 
 }
