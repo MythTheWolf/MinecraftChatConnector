@@ -5,6 +5,7 @@ import java.net.*;
 import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.myththewolf.MCC.MCCMain;
 
 public class TCPServer {
   private boolean run = false;
@@ -23,7 +24,7 @@ public class TCPServer {
 
 
     try {
-      welcomeSocket = new ServerSocket(6789);
+      welcomeSocket = new ServerSocket(MCCMain.plugin.getJSONConfig().getInt("bind-port"));
     } catch (IOException e1) {
       // TODO Auto-generated catch block
       e1.printStackTrace();
@@ -89,7 +90,7 @@ public class TCPServer {
     }
   }
 
-  public void registerEventListener(String scope, MessageChannelListener list) {
+  public void registerPacketListener(String scope, MessageChannelListener list) {
     events.put(scope, list);
   }
 
