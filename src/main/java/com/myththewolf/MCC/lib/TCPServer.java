@@ -44,6 +44,7 @@ public class TCPServer {
                 e.printStackTrace();
                 continue;
             }
+            System.out.print("Imboud packet: " + clientSentence);
             JSONObject RAW = new JSONObject(clientSentence);
             try {
 

@@ -30,8 +30,7 @@ public class MCCMain implements PluginAdapter {
             }
         });
         T.start();
-        srv.registerPacketListener("server-online", new ServerOnlineMessageListener());
-        srv.registerPacketListener("server", new ServerOfflineListener());
+
         srv.registerPacketListener("user-join", new UserJoinListener());
         srv.registerPacketListener("user-chat", new UserChatListener());
         try {
