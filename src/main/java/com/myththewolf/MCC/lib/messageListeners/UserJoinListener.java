@@ -13,7 +13,7 @@ public class UserJoinListener implements MessageChannelListener {
         BotPlugin pl = MCCMain.plugin;
         JSONObject conf = pl.getJSONConfig();
         if (conf.isNull("info-channel")) {
-            System.err.println("Recieved packet of type USER-JOIN but it has no channel to route to!");
+            System.err.println("Recieved packet of type USER-JOIN but it has no channel to route to! (Did you run ;setinfochan ?)");
             return;
         } else {
             String msg = "[UserJoin]" + parsed.getString("username");
