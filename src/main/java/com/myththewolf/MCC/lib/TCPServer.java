@@ -45,10 +45,12 @@ public class TCPServer {
                 System.out.print("CAUGHT-3");
                 continue;
             }
-            System.out.print("Imboud packet: " + clientSentence);
-            JSONObject RAW = new JSONObject(clientSentence);
+            JSONObject RAW = null;
             try {
 
+                System.out.print("Imboud packet: " + clientSentence);
+
+                RAW = new JSONObject(clientSentence);
                 parse = new JSONObject(RAW.getString("data"));
 
                 if (parse == null || parse.isNull("packetType")) {
