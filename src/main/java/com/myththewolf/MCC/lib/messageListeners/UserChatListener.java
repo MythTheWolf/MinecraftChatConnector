@@ -14,6 +14,7 @@ public class UserChatListener implements MessageChannelListener {
             System.err.println("Recieved packet of type `user-chat` but it has no channel to go to! (Did you run ;setchatchan ?)");
             return;
         }
+
         String msg = "[" + parsed.getString("username") + "]" + parsed.getString("message");
         MCCMain.plugin.getJDAInstance().getTextChannelById(conf.getString("chat-channel")).sendMessage(msg).queue();
     }

@@ -1,5 +1,6 @@
 package com.myththewolf.MCC.lib;
 
+import java.awt.*;
 import java.io.*;
 import java.net.*;
 import java.util.HashMap;
@@ -61,13 +62,15 @@ public class TCPServer {
             JSONObject rep = new JSONObject();
             rep.put("status", "OK");
 
+            System.out.print("Responding w/:" + rep.toString());
+            writeToClient(rep.toString());
             events.forEach((key, val) -> {
                 if (key.equals(type)) {
                     parse.remove("packetType");
                     val.onEvent(parse.toString(), this);
                 }
             });
-            writeToClient(rep.toString());
+
         }
 
         try {
