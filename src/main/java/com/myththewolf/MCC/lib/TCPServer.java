@@ -17,7 +17,7 @@ public class TCPServer {
     private HashMap<String, MessageChannelListener> events = new HashMap<>();
     private JSONObject parse = null;
 
-    public void startServer() throws Exception {
+    public void startServer() {
         run = true;
         run();
     }
@@ -33,6 +33,7 @@ public class TCPServer {
         }
         System.out.println("[MCC] Socket server running on /" + welcomeSocket.getLocalPort());
         while (run) {
+            System.out.print("accept");
             try {
                 connectionSocket = welcomeSocket.accept();
                 BufferedReader inFromClient =
