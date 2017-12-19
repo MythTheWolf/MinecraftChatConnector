@@ -57,11 +57,11 @@ public class TCPServer {
                 }
 
             } catch (JSONException e) {
-                System.out.print("CAUGHT-1");
                 JSONObject resp = new JSONObject();
-                resp.put("ID", RAW.getString("ID"));
+                //resp.put("ID", RAW.getString("ID"));
                 resp.put("status", "BADREQUST");
                 writeToClient(resp.toString());
+                continue;
             }
 
             String type = parse.getString("packetType");
