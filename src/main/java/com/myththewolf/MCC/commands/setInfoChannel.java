@@ -20,7 +20,7 @@ public class setInfoChannel implements CommandExecutor {
     }
     String chanID = command.e.getMessage().getMentionedChannels().get(0).getId();
     JSONObject config = command.getPlugin().getJSONConfig();
-    config.put("user-join-channel", chanID);
+    config.put("info-channel", chanID);
     command.getPlugin().saveConfig(config);
     command.reply(":ok_hand: Updated.");
   }
