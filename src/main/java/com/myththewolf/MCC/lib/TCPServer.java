@@ -28,12 +28,12 @@ public class TCPServer {
         try {
             welcomeSocket = new ServerSocket(MCCMain.plugin.getJSONConfig().getInt("bind-port"));
         } catch (IOException e1) {
+            System.out.print("CAUGHT-4");
 
-            e1.printStackTrace();
         }
         System.out.println("[MCC] Socket server running on /" + welcomeSocket.getLocalPort());
         while (run) {
-            System.out.print("accept");
+
             try {
                 connectionSocket = welcomeSocket.accept();
                 BufferedReader inFromClient =
@@ -42,7 +42,7 @@ public class TCPServer {
 
                 clientSentence = inFromClient.readLine();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.print("CAUGHT-3");
                 continue;
             }
             System.out.print("Imboud packet: " + clientSentence);
@@ -57,6 +57,7 @@ public class TCPServer {
                 }
 
             } catch (JSONException e) {
+                System.out.print("CAUGHT-1");
                 JSONObject resp = new JSONObject();
                 resp.put("ID", RAW.getString("ID"));
                 resp.put("status", "BADREQUST");
@@ -81,7 +82,7 @@ public class TCPServer {
         try {
             welcomeSocket.close();
         } catch (IOException e) {
-
+            System.out.print("CAUGHT-2");
         }
         System.out.println("Closing server");
     }
