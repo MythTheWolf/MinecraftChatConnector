@@ -44,24 +44,27 @@ public class TCPServer {
                 e.printStackTrace();
                 continue;
             }
-
+            JSONObject RAW = new JSONObject(clientSentence);
             try {
-                parse = new JSONObject(clientSentence);
+
+                parse = new JSONObject(RAW.getString("data"));
 
                 if (parse == null || parse.isNull("packetType")) {
 
                     throw new JSONException("packetType is missing!");
                 }
+
             } catch (JSONException e) {
-                System.out.println("Recevied bad packet: " + clientSentence);
-                sayError(e.getMessage());
-                continue;
+                JSONObject resp = new JSONObject();
+                resp.put("ID", RAW.getString("ID"));
+                resp.put("status", "BADREQUST");
+                writeToClient(resp.toString());
             }
 
             String type = parse.getString("packetType");
             JSONObject rep = new JSONObject();
             rep.put("status", "OK");
-
+            rep.put("ID", RAW.getString("ID"));
             System.out.print("Responding w/:" + rep.toString());
             writeToClient(rep.toString());
             events.forEach((key, val) -> {
