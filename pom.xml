@@ -16,6 +16,7 @@
             <groupId>com.github.MythTheWolf</groupId>
             <artifactId>BotServ</artifactId>
             <version>e28f3feece</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
