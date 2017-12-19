@@ -81,7 +81,6 @@ public class TCPServer {
             welcomeSocket.close();
         } catch (IOException e) {
 
-            e.printStackTrace();
         }
         System.out.println("Closing server");
     }
