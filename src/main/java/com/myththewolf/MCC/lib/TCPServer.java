@@ -60,7 +60,7 @@ public class TCPServer {
 
             } catch (JSONException e) {
                 JSONObject resp = new JSONObject();
-                //resp.put("ID", RAW.getString("ID"));
+                resp.put("ID", RAW.getString("ID"));
                 resp.put("status", "BADREQUST");
                 resp.put("message", e.getMessage());
                 writeToClient(resp.toString());
