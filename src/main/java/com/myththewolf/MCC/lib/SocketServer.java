@@ -86,6 +86,7 @@ public class SocketServer {
                     response.put("message", e.getMessage());
                     response.put("packetType", "PACKET_RESULT");
                     response.put("ID", ID);
+                    e.printStackTrace();
                     writeBack(clientSocket, response.toString());
                 }
             } catch (IOException e) {
