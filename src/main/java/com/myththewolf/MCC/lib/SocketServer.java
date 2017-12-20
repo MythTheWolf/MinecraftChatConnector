@@ -20,7 +20,7 @@ public class SocketServer {
     public SocketServer(int port) {
         try {
             server = new ServerSocket(port);
-            server.setSoTimeout(10000);
+       //     server.setSoTimeout(10000);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,6 +36,7 @@ public class SocketServer {
 
     public void run() {
         try {
+            System.out.println("Waiting for client on port " + server.getLocalPort() + "...");
             clientSocket = server.accept();
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,7 +44,7 @@ public class SocketServer {
 
         while (shouldRun) {
             try {
-                System.out.println("Waiting for client on port " + server.getLocalPort() + "...");
+
 
                 System.out.println("Connection from " + clientSocket.getRemoteSocketAddress() + "accepted.");
                 BufferedReader fromClient =
