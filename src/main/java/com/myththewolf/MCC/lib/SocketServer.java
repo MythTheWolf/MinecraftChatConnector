@@ -20,7 +20,7 @@ public class SocketServer {
     public SocketServer(int port) {
         try {
             server = new ServerSocket(port);
-       //     server.setSoTimeout(10000);
+            //     server.setSoTimeout(10000);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,6 +57,9 @@ public class SocketServer {
                     if (object.isNull("packetType")) {
                         throw new JSONException("packetType is not optional!");
                     }
+                    if (object.isNull("ID")) {
+                        throw new JSONException("Identify yourself!");
+                    }
                     if (!this.receivers.containsKey(object.getString("packetType"))) {
                         throw new JSONException("Unknown packet type: " + object.getString("packetType"));
                     }
@@ -68,9 +71,10 @@ public class SocketServer {
                     JSONObject theResult = new JSONObject();
                     String STATUS = !res.isNull("status") ? res.getString("status") : "OK";
                     String MESSAGE = !res.isNull("message") ? res.getString("message") : "The packet was received, but the packet handler did not supply a message";
+                    theResult.put("packetType", "PACKET_RESULT");
                     theResult.put("status", STATUS);
                     theResult.put("message", MESSAGE);
-
+                    theResult.put("ID", object.getString("ID"));
                     writeBack(clientSocket, theResult.toString());
 
                 } catch (JSONException e) {
