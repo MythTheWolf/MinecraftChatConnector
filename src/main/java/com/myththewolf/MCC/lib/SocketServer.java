@@ -62,8 +62,9 @@ public class SocketServer {
                     }
 
 
-                    object.remove("packetType");
-                    JSONObject res = this.receivers.get(object.getString("packetType")).onMessage(object, this);
+                    JSONObject cut = new JSONObject(object.toString());
+                    cut.remove("packetType");
+                    JSONObject res = this.receivers.get(object.getString("packetType")).onMessage(cut, this);
                     JSONObject theResult = new JSONObject();
                     String STATUS = !res.isNull("status") ? res.getString("status") : "OK";
                     String MESSAGE = !res.isNull("message") ? res.getString("message") : "The packet was received, but the packet handler did not supply a message";
