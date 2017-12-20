@@ -86,4 +86,8 @@ public class SocketServer {
             System.out.println("A error occurred while writing a message to the client: `" + message + "`::" + e.getMessage());
         }
     }
+
+    public void registerPacketHandler(String packetType, SocketReceiver receiver) {
+        this.receivers.put(packetType, receiver);
+    }
 }
