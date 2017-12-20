@@ -13,8 +13,9 @@ import java.util.HashMap;
 
 public class SocketServer {
     private ServerSocket server;
-    public boolean shouldRun = false;
+    private boolean shouldRun = false;
     public HashMap<String, SocketReceiver> receivers = new HashMap<>();
+    private Socket clientSocket;
 
     public SocketServer(int port) {
         try {
@@ -34,10 +35,16 @@ public class SocketServer {
     }
 
     public void run() {
+        try {
+            clientSocket = server.accept();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         while (shouldRun) {
             try {
                 System.out.println("Waiting for client on port " + server.getLocalPort() + "...");
-                Socket clientSocket = server.accept();
+
                 System.out.println("Connection from " + clientSocket.getRemoteSocketAddress() + "accepted.");
                 BufferedReader fromClient =
                         new BufferedReader(
