@@ -81,6 +81,7 @@ public class SocketServer {
                     JSONObject response = new JSONObject();
                     response.put("status", "BAD_REQUEST");
                     response.put("message", e.getMessage());
+                    response.put("packetType", "PACKET_RESULT");
                     writeBack(clientSocket, response.toString());
                 }
             } catch (IOException e) {
