@@ -52,8 +52,11 @@ public class SocketServer {
                                 new InputStreamReader(clientSocket.getInputStream()));
                 String line = fromClient.readLine();
                 System.out.println("Got data from client: " + line);
+                String ID = "&SUPER&";
                 try {
                     JSONObject object = new JSONObject(line);
+
+                    ID = object.getString("ID");
                     if (object.isNull("packetType")) {
                         throw new JSONException("packetType is not optional!");
                     }
@@ -82,6 +85,7 @@ public class SocketServer {
                     response.put("status", "BAD_REQUEST");
                     response.put("message", e.getMessage());
                     response.put("packetType", "PACKET_RESULT");
+                    response.put("ID", ID);
                     writeBack(clientSocket, response.toString());
                 }
             } catch (IOException e) {
