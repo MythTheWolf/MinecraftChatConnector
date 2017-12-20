@@ -73,10 +73,10 @@ public class SocketServer {
                     JSONObject res = this.receivers.get(object.getString("packetType")).onMessage(cut, this);
                     JSONObject theResult = new JSONObject();
                     String STATUS = res.isNull("status") ? "OK" : res.getString("status");
-                    String MESSAGE = !res.isNull("message") ? "TEST" : "The packet was received, but the packet handler did not supply a message";
+                   // String MESSAGE = !res.isNull("message") ? "TEST" : "The packet was received, but the packet handler did not supply a message";
                     theResult.put("packetType", "PACKET_RESULT");
                     theResult.put("status", STATUS);
-                    theResult.put("message", MESSAGE);
+                    //theResult.put("message", MESSAGE);
                     theResult.put("ID", object.getString("ID"));
                     writeBack(clientSocket, theResult.toString());
 
