@@ -11,7 +11,7 @@ public class QuickReplies {
     public static JSONObject SUCCESS(String msg) {
         JSONObject succ = new JSONObject();
         succ.put("status", "OK");
-        succ.put("message", succ);
+        succ.put("message", msg);
         return succ;
     }
 }
