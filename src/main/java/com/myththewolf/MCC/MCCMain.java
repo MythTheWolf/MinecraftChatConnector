@@ -3,6 +3,7 @@ package com.myththewolf.MCC;
 import com.myththewolf.BotServ.lib.API.invoke.BotPlugin;
 import com.myththewolf.BotServ.lib.API.invoke.PluginAdapter;
 import com.myththewolf.MCC.PacketHandlers.UserChatHandler;
+import com.myththewolf.MCC.events.MessageReceivedListener;
 import com.myththewolf.MCC.lib.SocketServer;
 
 
@@ -21,6 +22,7 @@ public class MCCMain implements PluginAdapter {
         SocketServer SS = new SocketServer(6789);
         SS.startServer();
         SS.registerPacketHandler("user-chat", new UserChatHandler());
+        arg0.getJDAInstance().addEventListener(new MessageReceivedListener(arg0,SS));
     }
 
 }

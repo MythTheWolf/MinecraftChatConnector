@@ -38,6 +38,7 @@ public class SocketServer {
         try {
             System.out.println("Waiting for client on port " + server.getLocalPort() + "...");
             clientSocket = server.accept();
+            System.out.println("Connection from " + clientSocket.getRemoteSocketAddress() + "accepted.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +47,6 @@ public class SocketServer {
             try {
 
 
-                System.out.println("Connection from " + clientSocket.getRemoteSocketAddress() + "accepted.");
                 BufferedReader fromClient =
                         new BufferedReader(
                                 new InputStreamReader(clientSocket.getInputStream()));
@@ -92,6 +92,9 @@ public class SocketServer {
                 System.out.println("Fatal exception in socket server: " + e.getMessage());
             }
         }
+        if (shouldRun) {
+            run();
+        }
     }
 
     public void writeBack(Socket bridge, String message) {
@@ -107,5 +110,9 @@ public class SocketServer {
 
     public void registerPacketHandler(String packetType, SocketReceiver receiver) {
         this.receivers.put(packetType, receiver);
+    }
+
+    public Socket getConnectionSocket() {
+        return getConnectionSocket();
     }
 }
