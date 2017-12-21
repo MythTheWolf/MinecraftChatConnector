@@ -113,6 +113,6 @@ public class SocketServer {
     }
 
     public Socket getConnectionSocket() {
-        return getConnectionSocket();
+        return this.clientSocket;
     }
 }
