@@ -75,7 +75,7 @@ public class SocketServer {
                     String STATUS = res.isNull("status") ? "OK" : res.getString("status");
                     theResult.put("packetType", "PACKET_RESULT");
                     theResult.put("status", STATUS);
-                    theResult.put("message", res.getString("message"));
+             //       theResult.put("message", res.getString("message"));
                     theResult.put("ID", object.getString("ID"));
                     writeBack(clientSocket, theResult.toString());
 
