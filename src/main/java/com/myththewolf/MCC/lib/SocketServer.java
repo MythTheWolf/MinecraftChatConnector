@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class SocketServer {
     private ServerSocket server;
     private boolean shouldRun = false;
-    public HashMap<String, SocketReceiver> receivers = new HashMap<>();
+    public HashMap<String, PacketHandler> receivers = new HashMap<>();
     private Socket clientSocket;
 
     public SocketServer(int port) {
@@ -108,7 +108,7 @@ public class SocketServer {
         }
     }
 
-    public void registerPacketHandler(String packetType, SocketReceiver receiver) {
+    public void registerPacketHandler(String packetType, PacketHandler receiver) {
         this.receivers.put(packetType, receiver);
     }
 

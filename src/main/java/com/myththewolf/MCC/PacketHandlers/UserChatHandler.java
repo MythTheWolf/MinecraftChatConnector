@@ -3,11 +3,11 @@ package com.myththewolf.MCC.PacketHandlers;
 import com.myththewolf.BotServ.lib.API.invoke.BotPlugin;
 import com.myththewolf.MCC.MCCMain;
 import com.myththewolf.MCC.lib.QuickReplies;
-import com.myththewolf.MCC.lib.SocketReceiver;
+import com.myththewolf.MCC.lib.PacketHandler;
 import com.myththewolf.MCC.lib.SocketServer;
 import org.json.JSONObject;
 
-public class UserChatHandler implements SocketReceiver {
+public class UserChatHandler implements PacketHandler {
     @Override
     public JSONObject onMessage(JSONObject data, SocketServer server) {
         String USERNAME = data.getString("username");
